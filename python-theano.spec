@@ -16,6 +16,7 @@ BuildArch:	noarch
 Requires:	python-numpy >= 1.3.0, python-scipy >= 0.7.0
 Requires:	blas-devel, python-devel, gcc-c++
 Suggests:	python-nose, nvidia-cuda-toolkit
+BuildRequires:	python-devel
 
 %description
 Theano is a Python library that allows you to define, optimize, and
