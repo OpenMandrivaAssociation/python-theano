@@ -1,22 +1,21 @@
 %define tarname Theano
-%define name	python-theano
-%define version	0.4.1
-%define release %mkrel 1
 
 Summary:	Optimizing compiler for mathematical expressions in Python
-Name:		%{name}
-Version:	%{version}
-Release:	%{release}
+Name:		python-theano
+Version:	0.4.1
+Release:	2
 Source0:	%{tarname}-%{version}.tar.gz
 License:	BSD
 Group:		Development/Python
 Url:		http://deeplearning.net/software/theano/
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildArch:	noarch
-Requires:	python-numpy >= 1.3.0, python-scipy >= 0.7.0
-Requires:	blas-devel, python-devel, gcc-c++
-Suggests:	python-nose, nvidia-cuda-toolkit
-BuildRequires:	python-devel
+Requires:	python-numpy >= 1.3.0
+Requires:	python-scipy >= 0.7.0
+Requires:	blas-devel
+Requires:	python-devel
+Requires:	gcc-c++
+Suggests:	python-nose
+Suggests:	nvidia-cuda-toolkit
 
 %description
 Theano is a Python library that allows you to define, optimize, and
@@ -46,16 +45,20 @@ data structures as numpy, allowing for easy interoperability.
 %__python setup.py build
 
 %install
-%__rm -rf %{buildroot}
 PYTHONDONTWRITEBYTECODE= %__python setup.py install --root=%{buildroot} --record=FILE_LIST
+sed -i 's/.*egg-info$//' FILE_LIST
 find %{buildroot} -type f -exec chmod 644 {} \;
 find doc/ -type f -exec chmod 644 {} \;
 find doc/ -type d -exec chmod 755 {} \;
 chmod 644 *.txt
 
-%clean
-%__rm -rf %{buildroot}
-
 %files -f FILE_LIST
-%defattr(-,root,root)
 %doc README.txt HISTORY.txt doc/* 
+
+
+%changelog
+* Tue Aug 16 2011 Lev Givon <lev@mandriva.org> 0.4.1-1mdv2012.0
++ Revision: 694704
+- import python-theano
+
+
