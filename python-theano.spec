@@ -3,7 +3,7 @@
 Summary:	Optimizing compiler for mathematical expressions in Python
 Name:		python-theano
 Version:	0.4.1
-Release:	2
+Release:	3
 Source0:	%{tarname}-%{version}.tar.gz
 License:	BSD
 Group:		Development/Python
