@@ -1,3 +1,5 @@
+%define	debug_package	%{nil}
+
 %define module Theano
 %define lmodule %(echo %{module} | tr [:upper:] [:lower:])
 
