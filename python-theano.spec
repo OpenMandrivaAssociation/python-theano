@@ -1,21 +1,22 @@
-%define tarname Theano
+%define module Theano
+%define lmodule %(echo %{module} | tr [:upper:] [:lower:])
 
 Summary:	Optimizing compiler for mathematical expressions in Python
-Name:		python-theano
-Version:	0.4.1
-Release:	3
-Source0:	%{tarname}-%{version}.tar.gz
+Name:		python-%{lmodule}
+Version:	1.0.5
+Release:	1
+Source0:	https://github.com/Theano/Theano/releases/%{module}-%{version}.tar.gz
 License:	BSD
 Group:		Development/Python
 Url:		http://deeplearning.net/software/theano/
+BuildRequires:	pkgconfig(python3)
+BuildRequires:	python3dist(numpy)
+BuildRequires:	python3dist(scipy)
+BuildRequires:	python3dist(setuptools)
+
+#Requires:	blas-devel
+
 BuildArch:	noarch
-Requires:	python-numpy >= 1.3.0
-Requires:	python-scipy >= 0.7.0
-Requires:	blas-devel
-Requires:	python-devel
-Requires:	gcc-c++
-Suggests:	python-nose
-Suggests:	nvidia-cuda-toolkit
 
 %description
 Theano is a Python library that allows you to define, optimize, and
@@ -38,27 +39,27 @@ gradient of an expression with respect to another. Symbolic
 expressions may be compiled into functions, which work on the same
 data structures as numpy, allowing for easy interoperability.
 
+%files
+%doc README.rst LICENSE.txt
+%{_bindir}/%{lmodule}-cache
+%{_bindir}/%{lmodule}-nose
+%{python3_sitelib}/bin
+%{python3_sitelib}/%{lmodule}
+%{python3_sitelib}/%{module}-%{version}-py?.?.egg-info
+
+#-----------------------------------------------------------------------
+
 %prep
-%setup -q -n %{tarname}-%{version}
+%autosetup -n %{module}-%{version}
 
 %build
-%__python setup.py build
+%py3_build
 
 %install
-PYTHONDONTWRITEBYTECODE= %__python setup.py install --root=%{buildroot} --record=FILE_LIST
-sed -i 's/.*egg-info$//' FILE_LIST
-find %{buildroot} -type f -exec chmod 644 {} \;
-find doc/ -type f -exec chmod 644 {} \;
-find doc/ -type d -exec chmod 755 {} \;
-chmod 644 *.txt
+%py3_install
 
-%files -f FILE_LIST
-%doc README.txt HISTORY.txt doc/* 
+# Restore executable permission on the scripts
+chmod a+x $(find %{buildroot} -name \*.py -o -name \*.sh | xargs grep -l '^#!')
 
-
-%changelog
-* Tue Aug 16 2011 Lev Givon <lev@mandriva.org> 0.4.1-1mdv2012.0
-+ Revision: 694704
-- import python-theano
-
-
+# Do not ship the tests
+rm -rf %{buildroot}%{python3_sitelib}/tests
