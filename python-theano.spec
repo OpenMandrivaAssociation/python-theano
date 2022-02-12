@@ -14,9 +14,13 @@ BuildRequires:	python3dist(numpy)
 BuildRequires:	python3dist(scipy)
 BuildRequires:	python3dist(setuptools)
 
-#Requires:	blas-devel
+Requires:	blas-devel
+Requires:	python3-devel
 
-BuildArch:	noarch
+Suggests:	python3-nose
+Suggests:	python3-pkg-resources
+
+#BuildArch:	noarch
 
 %description
 Theano is a Python library that allows you to define, optimize, and
