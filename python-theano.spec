@@ -6,7 +6,7 @@
 Summary:	Optimizing compiler for mathematical expressions in Python
 Name:		python-%{lmodule}
 Version:	1.0.5
-Release:	1
+Release:	2
 Source0:	https://github.com/Theano/Theano/releases/%{module}-%{version}.tar.gz
 License:	BSD
 Group:		Development/Python
