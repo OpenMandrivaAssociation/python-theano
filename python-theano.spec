@@ -51,7 +51,7 @@ data structures as numpy, allowing for easy interoperability.
 %{_bindir}/%{lmodule}-nose
 %{python3_sitelib}/bin
 %{python3_sitelib}/%{lmodule}
-%{python3_sitelib}/%{module}-%{version}-py?.?.egg-info
+%{python3_sitelib}/%{module}-%{version}-py*.*.egg-info
 
 #-----------------------------------------------------------------------
 
