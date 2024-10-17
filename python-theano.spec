@@ -10,7 +10,7 @@ Release:	2
 Source0:	https://github.com/Theano/Theano/releases/%{module}-%{version}.tar.gz
 License:	BSD
 Group:		Development/Python
-Url:		http://deeplearning.net/software/theano/
+Url:		https://deeplearning.net/software/theano/
 BuildRequires:	pkgconfig(python3)
 BuildRequires:	python3dist(numpy)
 BuildRequires:	python3dist(scipy)
